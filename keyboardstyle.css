@@ -1,6 +1,7 @@
 body {
     background-color: #000000;
     font-family: 'Arial', sans-serif;
+    color: #ABFC86;
 }
 
 #keyboardContainer {
@@ -23,12 +24,15 @@ body {
     height: 70px;
     line-height: 70px;
     width: 70px;
-    border: 2px solid #FF9CA9;
-    color: #FF9CA9;
+    border: 2px solid #ABFC86;
     display: inline-block;
     text-align: center;
     font-size: 26px;
     border-radius: 5px;
+}
+
+#spacebar{
+    width: 500px;
 }
 
 .floater {
@@ -36,7 +40,6 @@ body {
     width: 74px;
     line-height: 74px;
     text-align: center;
-    color: #FF9CA9;
     font-size: 72px;
     font-weight: bold;
     position: absolute;
