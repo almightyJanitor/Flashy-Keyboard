@@ -1,4 +1,5 @@
 var KEY_CODES = {
+    32: '#spacebar',
     65: '#a',
     66: '#b',
     67: '#c',
@@ -53,6 +54,8 @@ var KEY_CODES = {
     122: '#z',
     44: '#comma'
 };
+var COLOURS = ['#FF8CA9','#FFB078','#FFF678','#ABFC86','#78D9FF','#AC78FF']; //rainbow
+var cPointer = 4;
 
 function getKeyId(code) {
     if (KEY_CODES[code]) {
@@ -61,18 +64,21 @@ function getKeyId(code) {
     return 0;
 }
 
+function changeColour() {
+    $('body').css("color",COLOURS[cPointer]);
+    $('.key').css("border-color",COLOURS[cPointer]);
+    cPointer = ( cPointer + 1 ) % COLOURS.length;
+}
 
-function createFloaterAtKey(code) {
-    var keyId = getKeyId(code);
-    if (keyId == 0) {return;} //did not press a valid key
+function createFloaterAtKey(id) {
 
-    var position = $(keyId).offset(); //key's position to move floater to
-    var keyText = $(keyId).html(); //the letter of the floater
+    var position = $(id).offset(); //key's position to move floater to
+    var keyText = $(id).html(); //the letter of the floater
     
     var $floater = $("<div>", {"class": "floater","html": keyText});
     $floater.css(position);
     $('#floaterContainer').append($floater);
-    $floater.animate({'marginTop': '-=500px'}, 1000, function() {
+    $floater.animate({'marginTop': '-=600px'}, 1000, function() {
         $(this).remove();
     })
 
@@ -80,5 +86,11 @@ function createFloaterAtKey(code) {
 
 $(document).keypress(function(e) {
     console.log(e.which);
-    createFloaterAtKey(e.which);
+    var keyId = getKeyId(e.which);
+    if (keyId == 0) {return;} //did not press a valid key
+    if (keyId == '#spacebar') {
+        changeColour();
+    } else {
+        createFloaterAtKey(keyId);
+    }
 });
